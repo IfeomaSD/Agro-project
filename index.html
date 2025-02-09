@@ -32,12 +32,10 @@
             <aside class="maize-funding">
                 <p>April Maize Funding Cycle, Limited slots available!</p>
                 <div class="countdown">
-                <p>Ends in:  
-                    <span id="days" class="time">10 </span><span class="time">Days</span> 
-                    <span id="hours" class="time">12 </span><span class="time">Hours</span>
-                    <span id="minutes" class="time">30 </span><span class="time">Minutes</span>
-                </p>
-                <div class="clock">
+                <p>Ends in:</p>
+                <div>
+                    <p id="timer"></p>
+                </div>
                 </div>
             </div>
             </aside>
@@ -204,6 +202,29 @@
             </div>
         </section>
     </footer>
-    <script src="script.js"></script>
+    
+    <script>
+let countdownTime = (10 * 24 * 60 * 60) + (12 * 60 * 60) + (30 * 60); // 10 days, 12 hours, 30 minutes in seconds
+        
+        function updateTimer() {
+            let days = Math.floor(countdownTime / (24 * 60 * 60));
+            let hours = Math.floor((countdownTime % (24 * 60 * 60)) / (60 * 60));
+            let minutes = Math.floor((countdownTime % (60 * 60)) / 60);
+            let seconds = countdownTime % 60;
+            
+            document.getElementById('timer').textContent = `${days} Days ${hours} Hours ${minutes} Minutes`;
+            // ${seconds}Seconds
+
+            if (countdownTime > 0) {
+                countdownTime--;
+                setTimeout(updateTimer, 1000);
+            } else {
+                document.getElementById('timer').textContent = "Time's up!";
+            }
+        }
+        
+        updateTimer();
+
+    </script>
 </body>
 </html>
